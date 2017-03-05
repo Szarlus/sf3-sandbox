@@ -2,8 +2,17 @@ app:
     resource: "@AppBundle/Controller/"
     type:     annotation
 
-logout:
-    path: /secure/logout
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_security_login:
+    path: /secure/login
+    defaults:  { _controller: FOSUserBundle:Security:login }
+
+fos_user_security_check:
+    path: /secure/login_check
+    defaults:  { _controller: FOSUserBundle:Security:check }
+
+fos_user_security_logout:
+    path: /secure/logout
+    defaults:  { _controller: FOSUserBundle:Security:logout }

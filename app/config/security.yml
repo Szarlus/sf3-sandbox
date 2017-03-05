@@ -19,24 +19,23 @@ security:
             security: false
 
         secure:
-            pattern: ^/
+            pattern: ^/secure
             form_login:
                 login_path: fos_user_security_login
                 check_path: fos_user_security_check
                 csrf_token_generator: security.csrf.token_manager
-            logout:       true
+            logout:
+                path: fos_user_security_logout
+                target: /
             anonymous:    true
 
         admin_secure:
             pattern: ^/admin/secure
             http_basic: ~
-            anonymous:    true
 
 #        main:
 #            security: false
 
-    access_control:
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             # activate different ways to authenticate
 
             # http_basic: ~
