@@ -22,6 +22,7 @@ class LoadUsers implements FixtureInterface, ContainerAwareInterface
             ->setUsername('admin')
             ->setEmail('admin@example.com')
             ->setPlainPassword('test1234')
+            ->setRoles(['ROLE_ADMIN'])
             ->setEnabled(true);
 
         $user = $userManager->createUser();
@@ -29,6 +30,7 @@ class LoadUsers implements FixtureInterface, ContainerAwareInterface
             ->setUsername('user')
             ->setEmail('user@example.com')
             ->setPlainPassword('test1234')
+            ->setRoles(['ROLE_USER'])
             ->setEnabled(true);
 
         $userManager->updateUser($admin);

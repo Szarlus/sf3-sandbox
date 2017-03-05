@@ -4,10 +4,13 @@ security:
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER
+
     # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        fos_userbundle:
+            id: fos_user.user_provider.username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -15,8 +18,25 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        main:
-            anonymous: ~
+        secure:
+            pattern: ^/
+            form_login:
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
+                csrf_token_generator: security.csrf.token_manager
+            logout:       true
+            anonymous:    true
+
+        admin_secure:
+            pattern: ^/admin/secure
+            http_basic: ~
+            anonymous:    true
+
+#        main:
+#            security: false
+
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
             # activate different ways to authenticate
 
             # http_basic: ~
