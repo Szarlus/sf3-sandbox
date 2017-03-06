@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Task{% endblock %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+            <div id="welcome">
+                <h1>New Task</h1>
+            </div>
+            <div>
+                {{ form_start(form, {'action': path('task_new'), 'method': 'POST'}) }}
+                {{ form_widget(form) }}
+
+                <input type="submit" value="Add new task" />
+                <a href="{{ path('tasks_list') }}">
+                    Back to list
+                </a>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
