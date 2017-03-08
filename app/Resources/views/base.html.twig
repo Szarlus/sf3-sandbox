@@ -12,6 +12,11 @@
     <body>
         <div id="wrapper">
             <div id="container">
+                {% for flash_message in app.session.flashBag.get('success') %}
+                <p class="bg-success">
+                    {{ flash_message }}
+                </p>
+                {% endfor %}
                 {% block body %}{% endblock %}
             </div>
         </div>

@@ -7,7 +7,6 @@ use AppBundle\Form\Type\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -53,6 +52,8 @@ class TaskController extends Controller
             $em->persist($task);
             $em->flush();
 
+            $this->addFlash('success', 'Task was added');
+
             return $this->redirectToRoute('task_view', ['id' => $task->id()]);
         }
 
@@ -74,6 +75,8 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Task was updated');
+
             return $this->redirectToRoute('task_edit', ['id' => $task->id()]);
         }
 
@@ -84,10 +87,17 @@ class TaskController extends Controller
     }
 
     /**
-     * @Route("/delete/{id}")
+     * @Route("/delete/{id}", name="task_delete")
      */
     public function deleteAction($id)
     {
+        $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
+
+        $this->getDoctrine()->getManager()->remove($task);
+        $this->getDoctrine()->getManager()->flush();
+
+        $this->addFlash('success', 'Task was deleted');
+
         return $this->redirect($this->generateUrl('tasks_list'));
     }
 }
