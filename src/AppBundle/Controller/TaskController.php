@@ -21,7 +21,9 @@ class TaskController extends Controller
      */
     public function listAction(Request $request)
     {
-        return $this->render('task/list.html.twig');
+        $tasks = $this->getDoctrine()->getManager()->getRepository(Task::class)->findAll();
+
+        return $this->render('task/list.html.twig', ['tasks' => $tasks]);
     }
 
     /**
@@ -58,12 +60,24 @@ class TaskController extends Controller
     }
 
     /**
-     * @Route("/update/{id}")
-     * @Method("PUT")
+     * @Route("/edit/{id}", name="task_edit")
+     * @Method({"PUT", "GET"})
      */
-    public function updateAction($id)
+    public function editAction(Request $request, $id)
     {
-        return $this->render('task/list.html.twig');
+        $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
+
+        $form = $this->createForm(TaskType::class, $task);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('task_edit', ['id' => $task->id()]);
+        }
+
+        return $this->render('task/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
