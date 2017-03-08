@@ -5,10 +5,11 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="products")
+ * @ORM\Table(name="tasks")
  */
 class Task
 {
@@ -22,12 +23,14 @@ class Task
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
      */
     private $name;
 
     /**
      * @var string
      * @ORM\Column(type="string")
+     * @Assert\NotBlank
      */
     private $description;
 
