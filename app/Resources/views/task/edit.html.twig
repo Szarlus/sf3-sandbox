@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Task{% endblock %}
+{% block title %}Edit Task {{ task.name }}{% endblock %}
 
 {% block body %}
     <div id="welcome">
-        <h1>New Task</h1>
+        <h1>Edit Task {{ task.name }}</h1>
     </div>
     <div>
-        {{ form_start(form, {'action': path('task_new'), 'method': 'POST'}) }}
+        {{ form_start(form, {'action': path('task_edit', { 'id' : task.id }), 'method': 'PUT'}) }}
         {{ form_widget(form) }}
 
-        <input type="submit" class="btn btn-primary" value="Add new task" />
+        <input type="submit" class="btn btn-primary" value="Edit task" />
         <a href="{{ path('tasks_list') }}" class="btn btn-default" role="button">
             Back to list
         </a>

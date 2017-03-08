@@ -67,7 +67,7 @@ class TaskController extends Controller
     {
         $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
 
-        $form = $this->createForm(TaskType::class, $task);
+        $form = $this->createForm(TaskType::class, $task, ['method'=> 'PUT']);
 
         $form->handleRequest($request);
 
@@ -77,7 +77,10 @@ class TaskController extends Controller
             return $this->redirectToRoute('task_edit', ['id' => $task->id()]);
         }
 
-        return $this->render('task/edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('task/edit.html.twig', [
+            'form' => $form->createView(),
+            'task' => $task
+        ]);
     }
 
     /**
