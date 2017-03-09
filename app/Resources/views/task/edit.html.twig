@@ -11,9 +11,7 @@
         {{ form_widget(form) }}
 
         <input type="submit" class="btn btn-primary" value="Edit task" />
-        <a href="{{ path('tasks_list') }}" class="btn btn-default" role="button">
-            Back to list
-        </a>
+        <a href="{{ path('tasks_list') }}" class="btn btn-default" role="button">Back to list</a>
         {{ form_end(form) }}
     </div>
 {% endblock %}

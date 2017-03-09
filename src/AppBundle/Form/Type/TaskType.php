@@ -7,6 +7,7 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Task;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -26,6 +27,9 @@ class TaskType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false,
                 'expanded' => false
+            ])
+            ->add('tags', CollectionType::class, [
+                'entry_type' => TagType::class
             ]);
     }
 

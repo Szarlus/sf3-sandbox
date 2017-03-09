@@ -43,7 +43,7 @@ class Task
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Tag")
+     * @ORM\ManyToMany(targetEntity="Tag", cascade={"all"})
      * @ORM\JoinTable(name="product_tags",
      *  joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
      *  inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
@@ -139,5 +139,13 @@ class Task
     public function getDueDate()
     {
         return $this->dueDate;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getTags()
+    {
+        return $this->tags;
     }
 }
