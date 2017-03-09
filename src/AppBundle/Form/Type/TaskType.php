@@ -3,7 +3,9 @@
 namespace AppBundle\Form\Type;
 
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Task;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,7 +20,13 @@ class TaskType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('description', TextareaType::class)
-            ->add('dueDate', DateType::class);
+            ->add('dueDate', DateType::class)
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
