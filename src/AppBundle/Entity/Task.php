@@ -64,9 +64,16 @@ class Task
      */
     private $assignedTo;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string")
+     */
+    private $status;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->status = 'todo';
     }
 
     /**
@@ -142,10 +149,62 @@ class Task
     }
 
     /**
+     * @return User
+     */
+    public function getAssignedTo()
+    {
+        return $this->assignedTo;
+    }
+
+    /**
+     * @param User $assignedTo
+     */
+    public function setAssignedTo($assignedTo)
+    {
+        $this->assignedTo = $assignedTo;
+    }
+
+    /**
      * @return ArrayCollection
      */
     public function getTags()
     {
         return $this->tags;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
+    public function beginWork()
+    {
+        $this->status = 'in_progress';
+    }
+
+    public function finishWork()
+    {
+        $this->status = 'done';
+    }
+
+    public function isStarted()
+    {
+        return $this->status == 'in_progress';
+    }
+
+    public function isFinished()
+    {
+        return $this->status == 'done';
     }
 }

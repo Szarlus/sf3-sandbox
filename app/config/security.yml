@@ -27,7 +27,7 @@ security:
             logout:
                 path: fos_user_security_logout
                 target: /
-            anonymous:    true
+            anonymous: true
 
         admin_secure:
             pattern: ^/admin/secure

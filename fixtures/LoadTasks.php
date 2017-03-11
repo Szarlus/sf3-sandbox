@@ -23,6 +23,7 @@ class LoadTasks extends AbstractFixture implements OrderedFixtureInterface
         $exampleTask->getTags()->add(new Tag('frontend'));
 
         $exampleTask->setCategory($this->getReference('category-feature'));
+        $exampleTask->setAssignedTo($this->getReference('user-user1'));
 
         $manager->persist($exampleTask);
 

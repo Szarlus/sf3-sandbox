@@ -6,6 +6,19 @@
 <div id="welcome">
     <h1>Task {{ task.name }}</h1>
 
+    <div>
+        <p>status: {{ task.status }}</p>
+        <p>description: {{ task.description }}</p>
+        <p>assigned to: {{ task.assignedTo.username }}</p>
+    </div>
+
+    {% if not task.isStarted %}
+        <a href="{{ path('task_begin', { id: task.id }) }}" class="btn btn-default" role="button">Begin</a>
+    {% endif %}
+    {% if not task.isFinished %}
+        <a href="{{ path('task_finish', { id: task.id }) }}" class="btn btn-default" role="button">Finish</a>
+    {% endif %}
+
     <a href="{{ path('tasks_list') }}" class="btn btn-default" role="button">Back to list</a>
 </div>
 {% endblock %}

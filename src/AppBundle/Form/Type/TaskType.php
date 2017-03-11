@@ -5,6 +5,7 @@ namespace AppBundle\Form\Type;
 
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Task;
+use AppBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -25,6 +26,12 @@ class TaskType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => Category::class,
                 'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false
+            ])
+            ->add('assignedTo', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'username',
                 'multiple' => false,
                 'expanded' => false
             ])
