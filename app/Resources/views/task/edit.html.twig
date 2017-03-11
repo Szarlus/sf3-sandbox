@@ -3,15 +3,15 @@
 {% block title %}Edit Task {{ task.name }}{% endblock %}
 
 {% block body %}
-    <div id="welcome">
-        <h1>Edit Task {{ task.name }}</h1>
-    </div>
-    <div>
-        {{ form_start(form, {'action': path('task_edit', { 'id' : task.id }), 'method': 'PUT'}) }}
-        {{ form_widget(form) }}
+<div id="welcome">
+    <h1>Edit Task {{ task.name }}</h1>
+</div>
+<div>
+    {{ form_start(form, {'action': path('task_edit', { 'id' : task.id }), 'method': 'PUT'}) }}
+    {{ form_widget(form) }}
 
-        <input type="submit" class="btn btn-primary" value="Edit task" />
-        <a href="{{ path('tasks_list') }}" class="btn btn-default" role="button">Back to list</a>
-        {{ form_end(form) }}
-    </div>
+    <input type="submit" class="btn btn-primary" value="Edit task" />
+    <a href="{{ path('tasks_list') }}" class="btn btn-default" role="button">Back to list</a>
+    {{ form_end(form) }}
+</div>
 {% endblock %}

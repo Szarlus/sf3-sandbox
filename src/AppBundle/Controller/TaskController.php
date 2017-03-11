@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class TaskController extends Controller
 {
-
     /**
      * @Route("/list", name="tasks_list")
      */

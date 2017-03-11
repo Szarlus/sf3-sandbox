@@ -3,11 +3,11 @@
 {% block title %}Task {{ task.name }}!{% endblock %}
 
 {% block body %}
-    <div id="welcome">
-        <h1>Task {{ task.name }}</h1>
+<div id="welcome">
+    <h1>Task {{ task.name }}</h1>
 
-        <a href="{{ path('tasks_list') }}" class="btn btn-default" role="button">Back to list</a>
-    </div>
+    <a href="{{ path('tasks_list') }}" class="btn btn-default" role="button">Back to list</a>
+</div>
 {% endblock %}
 
 {% block stylesheets %}
