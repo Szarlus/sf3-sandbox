@@ -24,6 +24,7 @@ class Task
      * @var string
      * @ORM\Column(type="string")
      * @Assert\NotBlank
+     * @Assert\Length(min = 3)
      */
     private $name;
 
@@ -59,7 +60,7 @@ class Task
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $assignedTo;

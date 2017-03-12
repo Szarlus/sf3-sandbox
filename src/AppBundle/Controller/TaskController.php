@@ -31,6 +31,8 @@ class TaskController extends Controller
     {
         $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
 
+        dump(['some key' => 'example dump!']);
+
         return $this->render('task/view.html.twig', ['task' => $task]);
     }
 

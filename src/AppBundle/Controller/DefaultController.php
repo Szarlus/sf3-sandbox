@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,5 +18,18 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
         ]);
+    }
+
+    /**
+     * @Route("/example-dump", name="example_dump")
+     */
+    public function exampleDumpAction()
+    {
+        dump('example string');
+        dump(['key1' => 'val1', 'key2' => 'val2']);
+
+        dump(new Category('example'));
+
+        return $this->render('default/example_dump.html.twig');
     }
 }
