@@ -6,6 +6,8 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Validator\Constraints as AppAssert;
+
 
 /**
  * @ORM\Entity
@@ -62,6 +64,7 @@ class Task
      * @var User
      * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * @AppAssert\TasksLimitNotReached
      */
     private $assignedTo;
 
