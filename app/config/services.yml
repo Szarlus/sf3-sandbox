@@ -5,16 +5,7 @@ parameters:
 
 services:
 
-    app.tasks_repository:
-        class: Doctrine\ORM\EntityRepository
-        factory: 'doctrine.orm.entity_manager:getRepository'
-        arguments:
-            - 'AppBundle\Entity\Task'
-
-
     app.tasks_limit_not_reached_validator:
         class: AppBundle\Validator\Constraints\TasksLimitNotReachedValidator
-        arguments:
-            - '@app.tasks_repository'
         tags:
             - { name: validator.constraint_validator }

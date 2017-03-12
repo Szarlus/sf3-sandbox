@@ -14,18 +14,32 @@ class LoadTasks extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $exampleTask = new Task();
+        $tagBackend = new Tag('backend');
+        $tagFrontend = new Tag('frontend');
 
-        $exampleTask->setName('example');
-        $exampleTask->setDescription('example description');
-        $exampleTask->setDueDate(new \DateTime());
-        $exampleTask->getTags()->add(new Tag('backend'));
-        $exampleTask->getTags()->add(new Tag('frontend'));
+        $task1 = new Task();
 
-        $exampleTask->setCategory($this->getReference('category-feature'));
-        $exampleTask->setAssignedTo($this->getReference('user-user1'));
+        $task1->setName('example 1');
+        $task1->setDescription('example description 1');
+        $task1->setDueDate(new \DateTime());
+        $task1->getTags()->add($tagBackend);
+        $task1->getTags()->add($tagFrontend);
 
-        $manager->persist($exampleTask);
+        $task1->setCategory($this->getReference('category-feature'));
+        $task1->setAssignedTo($this->getReference('user-user1'));
+
+        $task2 = new Task();
+
+        $task2->setName('example 2');
+        $task2->setDescription('example description 2');
+        $task2->setDueDate(new \DateTime());
+        $task2->getTags()->add($tagBackend);
+
+        $task2->setCategory($this->getReference('category-feature'));
+        $task2->setAssignedTo($this->getReference('user-user1'));
+
+        $manager->persist($task1);
+        $manager->persist($task2);
 
         $manager->flush();
     }

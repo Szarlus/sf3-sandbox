@@ -12,6 +12,7 @@ use AppBundle\Validator\Constraints as AppAssert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="tasks")
+ * @AppAssert\TasksLimitNotReached
  */
 class Task
 {
@@ -62,9 +63,8 @@ class Task
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER", inversedBy="assignedTasks")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     * @AppAssert\TasksLimitNotReached
      */
     private $assignedTo;
 

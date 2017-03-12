@@ -10,5 +10,10 @@ use Symfony\Component\Validator\Constraint;
  */
 class TasksLimitNotReached extends Constraint
 {
-    public $message = 'User %username% has more than 2 tasks assigned';
+    public $message = 'User %username% has more than %limit% tasks assigned';
+
+    public function getTargets()
+    {
+        return self::CLASS_CONSTRAINT;
+    }
 }

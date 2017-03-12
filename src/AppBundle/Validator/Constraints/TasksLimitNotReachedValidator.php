@@ -4,38 +4,30 @@ namespace AppBundle\Validator\Constraints;
 
 
 use AppBundle\Entity\User;
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class TasksLimitNotReachedValidator extends ConstraintValidator
 {
-    /**
-     * @var EntityRepository
-     */
-    private $tasksRepository;
-
-    public function __construct(EntityRepository $tasksRepository)
-    {
-        $this->tasksRepository = $tasksRepository;
-    }
+    private $limit = 2;
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$value instanceof User) {
+        if (!$value->getAssignedTo() instanceof User) {
             return;
         }
 
-        $assignedTasks = $this->tasksRepository->findBy(['assignedTo' => $value]);
-        $nbOfAssignedTasks = count($assignedTasks);
+        $user = $value->getAssignedTo();
 
-        if ($nbOfAssignedTasks < 2) {
+        if ($user->isAssignedToTask($value) || $user->getNbOfAssignedTasks() < $this->limit) {
             return;
         }
 
         $this->context
             ->buildViolation($constraint->message)
-            ->setParameter('%username%', $value->getUsername())
+            ->setParameter('%username%', $user->getUsername())
+            ->setParameter('%limit%', $this->limit)
+            ->atPath('assignedTo')
             ->addViolation();
     }
 }

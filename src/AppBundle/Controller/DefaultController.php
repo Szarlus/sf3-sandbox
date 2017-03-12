@@ -12,7 +12,7 @@ class DefaultController extends Controller
     /**
      * @Route("/", name="homepage")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
@@ -26,7 +26,7 @@ class DefaultController extends Controller
     public function exampleDumpAction()
     {
         dump('example string');
-        dump(['key1' => 'val1', 'key2' => 'val2']);
+        dump(['key1' => 'val1', 'key2' => 'val2', 'key3' => 2.3, 'key4' => new Category('category')]);
 
         dump(new Category('example'));
 
