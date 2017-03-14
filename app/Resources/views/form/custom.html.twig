@@ -8,3 +8,10 @@
         </div>
     {% endspaceless %}
 {% endblock form_row %}
+
+{% block _task_name_widget %}
+    <div class="text_widget">
+        <p>custom task name widget</p>
+        {{ block('form_widget_simple') }}
+    </div>
+{% endblock %}
