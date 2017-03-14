@@ -10,6 +10,7 @@
         <p>status: {{ task.status }}</p>
         <p>description: {{ task.description }}</p>
         <p>assigned to: {{ task.assignedTo.username }}</p>
+        <p>file: {{ task.file.pathname }}</p>
     </div>
 
     {% if not task.isStarted %}

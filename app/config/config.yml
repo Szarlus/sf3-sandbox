@@ -49,6 +49,8 @@ doctrine:
         path:     "%kernel.root_dir%/../var/data.sqlite"
         dbname:   sf3_sandbox
         charset:  UTF8
+        types:
+            file_path:  AppBundle\Doctrine\Type\FilePath
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore

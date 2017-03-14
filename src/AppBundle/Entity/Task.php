@@ -74,6 +74,12 @@ class Task
      */
     private $status;
 
+    /**
+     * @var \SplFileObject
+     * @ORM\Column(type="file_path")
+     */
+    private $file;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -190,6 +196,22 @@ class Task
     public function setStatus($status)
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return \SplFileInfo
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param \SplFileInfo $file
+     */
+    public function setFile($file)
+    {
+        $this->file = $file;
     }
 
     public function beginWork()

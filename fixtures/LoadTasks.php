@@ -24,6 +24,7 @@ class LoadTasks extends AbstractFixture implements OrderedFixtureInterface
         $task1->setDueDate(new \DateTime());
         $task1->getTags()->add($tagBackend);
         $task1->getTags()->add($tagFrontend);
+        $task1->setFile(new \SplFileObject(__FILE__));
 
         $task1->setCategory($this->getReference('category-feature'));
         $task1->setAssignedTo($this->getReference('user-user1'));
@@ -34,6 +35,7 @@ class LoadTasks extends AbstractFixture implements OrderedFixtureInterface
         $task2->setDescription('example description 2');
         $task2->setDueDate(new \DateTime());
         $task2->getTags()->add($tagBackend);
+        $task2->setFile(new \SplFileObject(__FILE__));
 
         $task2->setCategory($this->getReference('category-feature'));
         $task2->setAssignedTo($this->getReference('user-user1'));
