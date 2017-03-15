@@ -9,3 +9,9 @@ services:
         class: AppBundle\Validator\Constraints\TasksLimitNotReachedValidator
         tags:
             - { name: validator.constraint_validator }
+
+    app.can_change_task_status_voter:
+        class: AppBundle\Security\Voter\CanChangeTaskStatusVoter
+        tags:
+            - { name: security.voter }
+        public: false

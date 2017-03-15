@@ -21,6 +21,8 @@ class TaskSecuredController extends Controller
     {
         $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
 
+        $this->denyAccessUnlessGranted('change_status', $task);
+
         $task->beginWork();
 
         $this->getDoctrine()->getManager()->flush();
@@ -37,6 +39,8 @@ class TaskSecuredController extends Controller
     public function finishAction($id)
     {
         $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
+
+        $this->denyAccessUnlessGranted('change_status', $task);
 
         $task->finishWork();
 

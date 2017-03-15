@@ -22,7 +22,7 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Cont
         $admin
             ->setUsername('admin')
             ->setEmail('admin@example.com')
-            ->setPlainPassword('test1234')
+            ->setPlainPassword('test123')
             ->setRoles(['ROLE_ADMIN'])
             ->setEnabled(true);
 
@@ -30,7 +30,7 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Cont
         $user1
             ->setUsername('user1')
             ->setEmail('user@example.com')
-            ->setPlainPassword('test1234')
+            ->setPlainPassword('test123')
             ->setRoles(['ROLE_USER'])
             ->setEnabled(true);
 
@@ -38,7 +38,7 @@ class LoadUsers extends AbstractFixture implements OrderedFixtureInterface, Cont
         $user2
             ->setUsername('user2')
             ->setEmail('user2@example.com')
-            ->setPlainPassword('test1234')
+            ->setPlainPassword('test123')
             ->setRoles(['ROLE_USER'])
             ->setEnabled(true);
 
