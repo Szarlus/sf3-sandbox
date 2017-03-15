@@ -17,7 +17,7 @@ class TaskController extends Controller
     /**
      * @Route("/list", name="tasks_list")
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
         $tasks = $this->getDoctrine()->getManager()->getRepository(Task::class)->findAll();
 
