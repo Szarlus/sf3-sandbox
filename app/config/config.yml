@@ -101,5 +101,7 @@ fos_rest:
     service:
         serializer: fos_rest.serializer.jms
     format_listener:
+        enabled: true
         rules:
-            - { path: rest, priorities: [ json ], fallback_format: ~ }
+            - { path: '^/rest', priorities: ['json'], fallback_format: ~ }
+            - { path: '^/', priorities: ['html'], fallback_format: ~ }
