@@ -93,11 +93,9 @@ assetic:
 
 fos_rest:
     view:
-        view_response_listener:  true
+        view_response_listener: force
         formats:
             json: true
-        templating_formats:
-            html: true
     service:
         serializer: fos_rest.serializer.jms
     format_listener:
