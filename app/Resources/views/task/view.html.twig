@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Task {{ task.name }}!{% endblock %}
+{% block title %}Task {{ task.name }}{% endblock %}
 
 {% block body %}
 <div id="welcome">
@@ -10,7 +10,7 @@
         <p>status: {{ task.status }}</p>
         <p>description: {{ task.description }}</p>
         <p>assigned to: {{ task.assignedTo.username }}</p>
-        <p>file: {{ task.file.pathname }}</p>
+        <p>file: {{ task.file ? task.file.pathname : 'none' }}</p>
     </div>
 
     {% if not task.isStarted %}

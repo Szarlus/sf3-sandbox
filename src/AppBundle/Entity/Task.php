@@ -76,7 +76,7 @@ class Task
 
     /**
      * @var \SplFileObject
-     * @ORM\Column(type="file_path")
+     * @ORM\Column(type="file_path", nullable=true)
      */
     private $file;
 

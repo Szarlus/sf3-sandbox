@@ -104,4 +104,4 @@ fos_rest:
         enabled: true
         rules:
             - { path: '^/rest', priorities: ['json'], fallback_format: ~ }
-            - { path: '^/', priorities: ['html'], fallback_format: ~ }
+            - { path: '^/', stop: true }
