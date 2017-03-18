@@ -76,7 +76,6 @@ assetic:
     debug:          "%kernel.debug%"
     use_controller: "%kernel.debug%"
     bundles:        [ 'AppBundle' ]
-
     filters:
         cssrewrite: ~
     assets:
@@ -91,3 +90,16 @@ assetic:
         jquery:
             inputs:
                 - %kernel.root_dir%/../vendor/components/jquery/jquery.js
+
+fos_rest:
+    view:
+        view_response_listener:  true
+        formats:
+            json: true
+        templating_formats:
+            html: true
+    service:
+        serializer: fos_rest.serializer.jms
+    format_listener:
+        rules:
+            - { path: rest, priorities: [ json ], fallback_format: ~ }

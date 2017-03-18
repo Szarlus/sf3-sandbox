@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Task;
 use AppBundle\Form\Type\TaskType;
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +16,11 @@ use Symfony\Component\HttpFoundation\Request;
 class TaskRestController extends FOSRestController
 {
     /**
-     * @Route("", name="tasks_rest_list")
+     * @Route("", name="task_rest_list")
      * @Method("GET")
+     * @Rest\View
      */
-    public function allAction()
+    public function listAction()
     {
         return $this->getDoctrine()->getManager()->getRepository(Task::class)->findAll();
     }
