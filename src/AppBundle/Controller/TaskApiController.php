@@ -12,12 +12,12 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/rest/task")
+ * @Route("/api/task")
  */
-class TaskRestController extends FOSRestController
+class TaskApiController extends FOSRestController
 {
     /**
-     * @Route("", name="task_rest_list")
+     * @Route("", name="task_api_list")
      * @Method("GET")
      * @Rest\View
      */
@@ -27,7 +27,7 @@ class TaskRestController extends FOSRestController
     }
 
     /**
-     * @Route("/{id}", name="task_rest_get")
+     * @Route("/{id}", name="task_api_get")
      * @Method("GET")
      * @Rest\View
      */
@@ -43,7 +43,7 @@ class TaskRestController extends FOSRestController
     }
 
     /**
-     * @Route("", name="task_rest_create")
+     * @Route("", name="task_api_create")
      * @Method("POST")
      * @Rest\View
      */
@@ -67,7 +67,7 @@ class TaskRestController extends FOSRestController
     }
 
     /**
-     * @Route("/{id}", name="task_rest_edit")
+     * @Route("/{id}", name="task_api_edit")
      * @Method("PUT")
      * @Rest\View
      */
@@ -91,7 +91,7 @@ class TaskRestController extends FOSRestController
     }
 
     /**
-     * @Route("/{id}", name="task_rest_delete")
+     * @Route("/{id}", name="task_api_delete")
      * @Method("DELETE")
      * @Rest\View
      */

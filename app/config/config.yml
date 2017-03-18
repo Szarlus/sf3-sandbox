@@ -101,5 +101,5 @@ fos_rest:
     format_listener:
         enabled: true
         rules:
-            - { path: '^/rest', priorities: ['json'], fallback_format: ~ }
+            - { path: '^/api', priorities: ['json'], fallback_format: ~ }
             - { path: '^/', stop: true }
