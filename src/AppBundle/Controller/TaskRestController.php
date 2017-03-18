@@ -8,6 +8,7 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -32,7 +33,13 @@ class TaskRestController extends FOSRestController
      */
     public function getAction($id)
     {
-        return $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
+        $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
+
+        if (!$task) {
+            $this->createNotFoundException("Task of id $id was not found");
+        }
+
+        return $task;
     }
 
     /**
@@ -42,9 +49,8 @@ class TaskRestController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-//        var_dump($request->request->all());die;
-
-        $form = $this->createForm(TaskType::class, new Task());
+        $task = new Task();
+        $form = $this->createTaskForm($task, $request->getMethod());
 
         $form->handleRequest($request);
 
@@ -57,7 +63,7 @@ class TaskRestController extends FOSRestController
         $em->persist($task);
         $em->flush();
 
-        return $this->view($task->getId(), 201);
+        return $this->view(['id' => $task->id()], 201);
     }
 
     /**
@@ -69,7 +75,11 @@ class TaskRestController extends FOSRestController
     {
         $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
 
-        $form = $this->createForm(TaskType::class, $task, ['method'=> 'PUT']);
+        if (!$task) {
+            throw $this->createNotFoundException("Task of id $id was not found");
+        }
+
+        $form = $this->createTaskForm($task, $request->getMethod());
 
         $form->handleRequest($request);
 
@@ -78,8 +88,6 @@ class TaskRestController extends FOSRestController
         }
 
         $this->getDoctrine()->getManager()->flush();
-
-        return $task;
     }
 
     /**
@@ -91,7 +99,26 @@ class TaskRestController extends FOSRestController
     {
         $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
 
+        if (!$task) {
+            throw $this->createNotFoundException("Task of id $id was not found");
+        }
+
         $this->getDoctrine()->getManager()->remove($task);
         $this->getDoctrine()->getManager()->flush();
+    }
+
+    /**
+     * @param Task $task
+     * @param $method
+     * @return FormInterface
+     */
+    private function createTaskForm(Task $task, $method)
+    {
+        return $this
+            ->get('form.factory')
+            ->createNamed(null, TaskType::class, $task, [
+                'method' => $method,
+                'csrf_protection' => false
+            ]);
     }
 }
