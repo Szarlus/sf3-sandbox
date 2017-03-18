@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Task;
 use AppBundle\Form\Type\TaskType;
 use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,7 @@ class TaskRestController extends FOSRestController
     /**
      * @Route("", name="task_rest_list")
      * @Method("GET")
+     * @Rest\View
      */
     public function listAction()
     {
@@ -26,6 +28,7 @@ class TaskRestController extends FOSRestController
     /**
      * @Route("/{id}", name="task_rest_get")
      * @Method("GET")
+     * @Rest\View
      */
     public function getAction($id)
     {
@@ -35,9 +38,12 @@ class TaskRestController extends FOSRestController
     /**
      * @Route("", name="task_rest_create")
      * @Method("POST")
+     * @Rest\View
      */
     public function createAction(Request $request)
     {
+//        var_dump($request->request->all());die;
+
         $form = $this->createForm(TaskType::class, new Task());
 
         $form->handleRequest($request);
@@ -57,6 +63,7 @@ class TaskRestController extends FOSRestController
     /**
      * @Route("/{id}", name="task_rest_edit")
      * @Method("PUT")
+     * @Rest\View
      */
     public function editAction(Request $request, $id)
     {
@@ -78,6 +85,7 @@ class TaskRestController extends FOSRestController
     /**
      * @Route("/{id}", name="task_rest_delete")
      * @Method("DELETE")
+     * @Rest\View
      */
     public function deleteAction($id)
     {
