@@ -1,0 +1,27 @@
+AppBundle\Entity\Task:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [task_list, task_details]
+        name:
+            expose: true
+            groups: [task_list, task_details]
+        description:
+            expose: true
+            groups: [task_list, task_details]
+        category:
+            expose: true
+            groups: [task_details]
+        dueDate:
+            expose: true
+            groups: [task_list, task_details]
+        assignedTo:
+            expose: true
+            groups: [task_details]
+        status:
+            expose: true
+            groups: [task_details]
+        file:
+            expose: true
+            groups: [task_details]

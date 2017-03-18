@@ -1,0 +1,6 @@
+AppBundle\Entity\User:
+    exclusion_policy: ALL
+    properties:
+        id:
+            expose: true
+            groups: [task_details]

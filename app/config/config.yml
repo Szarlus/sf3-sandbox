@@ -103,3 +103,14 @@ fos_rest:
         rules:
             - { path: '^/api', priorities: ['json'], fallback_format: ~ }
             - { path: '^/', stop: true }
+
+jms_serializer:
+    metadata:
+        auto_detection: false
+        directories:
+            app_entities:
+                namespace_prefix: "AppBundle\\Entity"
+                path: %kernel.root_dir%/config/serializer/Entity
+            fos_user:
+                namespace_prefix: "FOS\\UserBundle\\Model"
+                path: %kernel.root_dir%/config/serializer/FOSUser

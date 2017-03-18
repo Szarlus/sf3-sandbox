@@ -29,7 +29,7 @@ class TaskApiController extends FOSRestController
     /**
      * @Route("/{id}", name="task_api_get")
      * @Method("GET")
-     * @Rest\View
+     * @Rest\View(serializerGroups={"task_details"})
      */
     public function getAction($id)
     {
