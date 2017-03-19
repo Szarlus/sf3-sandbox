@@ -3,24 +3,12 @@
 namespace AppBundle\Entity;
 
 
-use Doctrine\ORM\Mapping as ORM;
-
-/**
- * @ORM\Entity
- * @ORM\Table(name="tags")
- */
 class Tag
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     private $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string")
      */
     private $name;
 

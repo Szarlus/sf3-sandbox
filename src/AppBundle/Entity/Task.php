@@ -4,28 +4,19 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Validator\Constraints as AppAssert;
 
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="tasks")
  * @AppAssert\TasksLimitNotReached
  */
 class Task
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
     private $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string")
      * @Assert\NotBlank
      * @Assert\Length(min = 3)
      */
@@ -33,50 +24,37 @@ class Task
 
     /**
      * @var string
-     * @ORM\Column(type="string")
      * @Assert\NotBlank
      */
     private $description;
 
     /**
      * @var Category
-     * @ORM\ManyToOne(targetEntity="Category")
-     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
      */
     private $category;
 
     /**
      * @var ArrayCollection
-     * @ORM\ManyToMany(targetEntity="Tag", cascade={"all"})
-     * @ORM\JoinTable(name="product_tags",
-     *  joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id")},
-     *  inverseJoinColumns={@ORM\JoinColumn(name="tag_id", referencedColumnName="id")}
-     * )
      */
     private $tags;
 
     /**
      * @var \DateTime
-     * @ORM\Column(type="datetime")
      */
     private $dueDate;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER", inversedBy="assignedTasks")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $assignedTo;
 
     /**
      * @var string
-     * @ORM\Column(type="string")
      */
     private $status;
 
     /**
      * @var \SplFileObject
-     * @ORM\Column(type="file_path", nullable=true)
      */
     private $file;
 

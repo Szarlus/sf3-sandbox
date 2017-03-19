@@ -1,0 +1,9 @@
+AppBundle\Entity\Category:
+    type: entity
+    table: categories
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name: ~

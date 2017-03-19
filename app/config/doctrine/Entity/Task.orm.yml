@@ -1,0 +1,41 @@
+AppBundle\Entity\Task:
+    type: entity
+    table: tasks
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name: ~
+        description: ~
+        dueDate:
+            type: datetime
+        status: ~
+        file:
+            type: file_path
+            nullable: true
+    manyToOne:
+        category:
+            targetEntity: AppBundle\Entity\Category
+            joinColumn:
+                name: category_id
+                referencedColumnName: id
+        assignedTo:
+            targetEntity: AppBundle\Entity\User
+            fetch: EAGER
+            inversedBy: assignedTasks
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    manyToMany:
+        tags:
+          targetEntity: AppBundle\Entity\Tag
+          cascade: ["all"]
+          joinTable:
+            name: product_tags
+            joinColumns:
+              product_id:
+                referencedColumnName: id
+            inverseJoinColumns:
+              tag_id:
+                referencedColumnName: id

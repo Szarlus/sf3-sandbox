@@ -18,7 +18,6 @@ framework:
     form:            ~
     csrf_protection: ~
     validation:      { enable_annotations: true }
-    #serializer:      { enable_annotations: true }
     templating:
         engines: ['twig']
     default_locale:  "%locale%"
@@ -54,7 +53,13 @@ doctrine:
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         naming_strategy: doctrine.orm.naming_strategy.underscore
-        auto_mapping: true
+        auto_mapping: false
+        mappings:
+            app_entites:
+                type: yml
+                prefix: AppBundle\Entity
+                dir: "%kernel.root_dir%/config/doctrine/Entity"
+                is_bundle: false
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -81,15 +86,15 @@ assetic:
     assets:
         bootstrap_js:
             inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/js/bootstrap.js
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/js/bootstrap.js"
         bootstrap_css:
             inputs:
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap.css
-                - %kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap-theme.css
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap.css"
+                - "%kernel.root_dir%/../vendor/twitter/bootstrap/dist/css/bootstrap-theme.css"
             filters: [cssrewrite]
         jquery:
             inputs:
-                - %kernel.root_dir%/../vendor/components/jquery/jquery.js
+                - "%kernel.root_dir%/../vendor/components/jquery/jquery.js"
 
 fos_rest:
     view:
@@ -109,8 +114,8 @@ jms_serializer:
         auto_detection: false
         directories:
             app_entities:
-                namespace_prefix: "AppBundle\\Entity"
-                path: %kernel.root_dir%/config/serializer/Entity
+                namespace_prefix: AppBundle\Entity
+                path: "%kernel.root_dir%/config/serializer/Entity"
             fos_user:
-                namespace_prefix: "FOS\\UserBundle\\Model"
-                path: %kernel.root_dir%/config/serializer/FOSUser
+                namespace_prefix: FOS\UserBundle\Model
+                path: "%kernel.root_dir%/config/serializer/FOSUser"
