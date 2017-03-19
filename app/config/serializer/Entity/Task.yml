@@ -24,4 +24,5 @@ AppBundle\Entity\Task:
             groups: [task_details]
         file:
             expose: true
+            inline: true
             groups: [task_details]

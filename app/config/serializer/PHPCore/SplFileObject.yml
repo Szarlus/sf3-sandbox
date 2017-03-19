@@ -1,0 +1,6 @@
+SplFileObject:
+    exclusion_policy: ALL
+    virtual_properties:
+        getPathname:
+            serialized_name: filepath
+            groups: [task_details]

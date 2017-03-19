@@ -120,3 +120,6 @@ jms_serializer:
             fos_user:
                 namespace_prefix: FOS\UserBundle\Model
                 path: "%kernel.root_dir%/config/serializer/FOSUser"
+            php_core:
+                namespace_prefix: ""
+                path: "%kernel.root_dir%/config/serializer/PHPCore"
