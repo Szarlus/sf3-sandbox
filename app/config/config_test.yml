@@ -20,6 +20,9 @@ doctrine:
         path: "%kernel.var_dir%/test_data.sqlite"
 
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: plaintext
+
     providers:
         fake:
             id: tests.fake_user_provider

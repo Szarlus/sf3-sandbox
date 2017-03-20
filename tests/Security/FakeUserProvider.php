@@ -4,7 +4,6 @@ namespace tests\Security;
 
 
 use AppBundle\Entity\User;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
@@ -13,26 +12,35 @@ class FakeUserProvider implements UserProviderInterface
 {
     public function loadUserByUsername($username)
     {
-        var_dump(__METHOD__, $username);die;
-        return $this->getAdmin();
+        return $this->getUser($username);
     }
 
     public function refreshUser(UserInterface $user)
     {
-        return $this->getAdmin();
+        return $this->getUser($user->getUsername());
     }
 
     public function supportsClass($class)
     {
-        return true;
+        return $class === User::class;
     }
 
-    private function getAdmin()
+    private function getUser($username)
     {
-        $admin = new User();
-        $admin->setUsername('admin');
-        $admin->setRoles(['ROLE_ADMIN']);
+        $userRoles = [
+            'admin' => ['ROLE_ADMIN']
+        ];
 
-        return $admin;
+        if (!isset($userRoles[$username])) {
+            throw new UsernameNotFoundException("user $username does not exist");
+        }
+
+        $user = new User();
+        $user->setUsername($username);
+        $user->setRoles($userRoles[$username]);
+        $user->setPassword('P@ssw0rd');
+        $user->setEnabled(true);
+
+        return $user;
     }
 }
