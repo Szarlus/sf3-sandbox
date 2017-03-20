@@ -28,8 +28,13 @@ security:
             id: tests.fake_user_provider
 
     firewalls:
+        secure:
+            provider: fake
+            http_basic: ~
+
         admin_secure:
             provider: fake
+            http_basic: ~
 
 services:
     tests.fake_user_provider:

@@ -28,7 +28,8 @@ class FakeUserProvider implements UserProviderInterface
     private function getUser($username)
     {
         $userRoles = [
-            'admin' => ['ROLE_ADMIN']
+            'admin' => ['ROLE_ADMIN'],
+            'user' => ['ROLE_USER']
         ];
 
         if (!isset($userRoles[$username])) {
