@@ -17,14 +17,20 @@ swiftmailer:
 
 doctrine:
     dbal:
-        path:     "%kernel.var_dir%/test_data.sqlite"
+        path: "%kernel.var_dir%/test_data.sqlite"
 
-#security:
-#    firewalls:
-#        secure:
-#            pattern: ^/secure
-#            http_basic: ~
-#
-#        admin_secure:
-#            pattern: ^/admin/secure
-#            http_basic: ~
+security:
+    providers:
+        fake:
+            id: tests.fake_user_provider
+
+    firewalls:
+        admin_secure:
+            provider: fake
+
+services:
+    tests.fake_user_provider:
+        class: tests\Security\FakeUserProvider
+
+
+
