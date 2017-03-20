@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Fixtures;
+namespace fixtures;
 
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
