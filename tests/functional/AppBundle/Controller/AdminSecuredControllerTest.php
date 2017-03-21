@@ -3,16 +3,27 @@
 namespace Tests\AppBundle\Controller;
 
 
-use tests\traits\SecurityContextDictionary;
+use AppBundle\Entity\User;
+use tests\traits\DatabaseDictionary;
+use tests\traits\HttpBasicAuthDictionary;
 use tests\WebTestCase;
 
 class AdminSecuredControllerTest extends WebTestCase
 {
-    use SecurityContextDictionary;
+    use HttpBasicAuthDictionary;
+    use DatabaseDictionary;
+
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->purgeDatabase();
+    }
+
 
     /** @test */
     public function itDisplaysWelcomeMessage()
     {
+        $this->adminExists();
         $this->userIsAuthenticatedAs('admin');
 
         $crawler = $this->client()->request('GET', '/admin/secure');
@@ -24,6 +35,7 @@ class AdminSecuredControllerTest extends WebTestCase
     /** @test */
     public function itReturns403IfUserIsNotAdmin()
     {
+        $this->userExists();
         $this->userIsAuthenticatedAs('user');
 
         $this->client()->request('GET', '/admin/secure');
@@ -39,5 +51,33 @@ class AdminSecuredControllerTest extends WebTestCase
         $this->client()->request('GET', '/admin/secure');
 
         $this->assertEquals(401, $this->lastResponse()->getStatusCode());
+    }
+
+    private function adminExists()
+    {
+        $userManager = $this->container()->get('fos_user.user_manager');
+
+        $user = new User();
+        $user->setUsername('admin');
+        $user->setEmail('admin@example.com');
+        $user->setRoles(['ROLE_ADMIN']);
+        $user->setPlainPassword('P@ssw0rd');
+        $user->setEnabled(true);
+
+        $userManager->updateUser($user);
+    }
+
+    private function userExists()
+    {
+        $userManager = $this->container()->get('fos_user.user_manager');
+
+        $user = new User();
+        $user->setUsername('user');
+        $user->setEmail('user@example.com');
+        $user->setRoles(['ROLE_USER']);
+        $user->setPlainPassword('P@ssw0rd');
+        $user->setEnabled(true);
+
+        $userManager->updateUser($user);
     }
 }

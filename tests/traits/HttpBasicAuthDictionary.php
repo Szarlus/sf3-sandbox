@@ -3,7 +3,7 @@
 namespace tests\traits;
 
 
-trait SecurityContextDictionary
+trait HttpBasicAuthDictionary
 {
     protected function userIsAuthenticatedAs($username)
     {
@@ -13,7 +13,7 @@ trait SecurityContextDictionary
         ]);
     }
 
-    private function userIsNotAuthenticated()
+    protected function userIsNotAuthenticated()
     {
         $this->client()->setServerParameters([]);
     }
