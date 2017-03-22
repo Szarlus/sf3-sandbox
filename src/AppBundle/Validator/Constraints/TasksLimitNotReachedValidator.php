@@ -3,7 +3,7 @@
 namespace AppBundle\Validator\Constraints;
 
 
-use AppBundle\Entity\User;
+use AppBundle\Entity\Task;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -13,7 +13,7 @@ class TasksLimitNotReachedValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$value->getAssignedTo() instanceof User) {
+        if (!$value instanceof Task || !$value->getAssignedTo()) {
             return;
         }
 

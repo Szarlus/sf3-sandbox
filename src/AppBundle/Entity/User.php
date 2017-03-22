@@ -30,4 +30,11 @@ class User extends FOSUser
     {
         return $this->assignedTasks->count();
     }
+
+    public function assignTo($task)
+    {
+        if (!$this->assignedTasks->contains($task)) {
+            $this->assignedTasks->add($task);
+        }
+    }
 }

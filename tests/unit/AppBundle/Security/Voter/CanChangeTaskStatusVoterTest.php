@@ -6,10 +6,11 @@ namespace tests\unit\AppBundle\Security\Voter;
 use AppBundle\Entity\Task;
 use AppBundle\Entity\User;
 use AppBundle\Security\Voter\CanChangeTaskStatusVoter;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class CanChangeTaskStatusVoterTest extends \PHPUnit_Framework_TestCase
+class CanChangeTaskStatusVoterTest extends TestCase
 {
     /** @var CanChangeTaskStatusVoter */
     private $voter;
