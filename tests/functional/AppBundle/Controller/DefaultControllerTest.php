@@ -1,13 +1,14 @@
 <?php
 
-namespace Tests\AppBundle\Controller;
+namespace tests\functional\AppBundle\Controller;
 
 
 use tests\WebTestCase;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndex()
+    /** @test */
+    public function itDisplaysWelcomeMessage()
     {
         $crawler = $this->client()->request('GET', '/');
 

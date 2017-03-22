@@ -36,7 +36,7 @@ class TaskApiController extends FOSRestController
         $task = $this->getDoctrine()->getManager()->getRepository(Task::class)->find($id);
 
         if (!$task) {
-            $this->createNotFoundException("Task of id $id was not found");
+            throw $this->createNotFoundException("Task of id $id was not found");
         }
 
         return $task;

@@ -25,6 +25,15 @@ trait DatabaseDictionary
         $this->flush();
     }
 
+    protected function saveAll($entities)
+    {
+        foreach ($entities as $entity) {
+            $this->persist($entity);
+        }
+
+        $this->flush();
+    }
+
     protected function purgeDatabase()
     {
         $purger = new ORMPurger($this->entityManager());

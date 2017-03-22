@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AppBundle\Controller;
+namespace tests\functional\AppBundle\Controller;
 
 
 use AppBundle\Entity\User;
