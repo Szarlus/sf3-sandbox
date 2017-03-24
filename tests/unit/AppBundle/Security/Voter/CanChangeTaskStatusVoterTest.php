@@ -35,7 +35,7 @@ class CanChangeTaskStatusVoterTest extends TestCase
     }
 
     /** @test */
-    public function itAbstainsFromVotingIfAttributeIsNotStatusChange()
+    public function itAbstainsFromVotingIfItIsNotAboutStatusChange()
     {
         $this->assertSame(Voter::ACCESS_ABSTAIN, $this->voter->vote(
             $this->token,
