@@ -1,0 +1,14 @@
+default:
+    suites:
+        task_features:
+            paths:
+                - %paths.base%/features/task
+            contexts:
+                - features\bootstrap\TaskContext
+
+    extensions:
+        Behat\Symfony2Extension: ~
+        Behat\MinkExtension:
+            sessions:
+                my_session:
+                    symfony2: ~
