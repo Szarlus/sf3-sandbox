@@ -5,7 +5,7 @@ namespace tests;
 
 use Symfony\Component\Form\FormInterface;
 
-abstract class FormTypeTest extends IntegrationTestCase
+abstract class FormTypeTestCase extends IntegrationTestCase
 {
     /** @var FormInterface */
     protected $form;
