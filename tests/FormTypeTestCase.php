@@ -31,6 +31,8 @@ abstract class FormTypeTestCase extends IntegrationTestCase
     {
         parent::setUp();
 
-        $this->form = $this->container()->get('form.factory')->create($this->formTypeClass());
+        $this->form = $this->container()->get('form.factory')->create($this->formTypeClass(), null, [
+            'csrf_protection' => false
+        ]);
     }
 }
