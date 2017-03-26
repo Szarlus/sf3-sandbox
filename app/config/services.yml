@@ -15,3 +15,31 @@ services:
         tags:
             - { name: security.voter }
         public: false
+
+    app.service_a:
+        class: AppBundle\Service\MyServiceA
+        arguments:
+            - "@app.service_b"
+
+    app.service_b:
+        class: AppBundle\Service\MyServiceB
+
+    app.service_a_factory:
+        class: AppBundle\Service\MyServiceAFactory
+
+    app.service_a_from_factory:
+        class: AppBundle\Service\MyServiceA
+        factory:
+            - '@app.service_a_factory'
+            - create
+        arguments:
+            - "@app.service_b"
+
+    app.service_b_lazy_loaded:
+        class: AppBundle\Service\MyServiceB
+        lazy: true
+
+    app.service_with_lazy_dep:
+        class: AppBundle\Service\MyServiceWithLazyDependency
+        arguments:
+            - "@app.service_b_lazy_loaded"

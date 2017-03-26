@@ -7,7 +7,7 @@ fos_user:
     prefix: /secure
 
 no_controller:
-    path: /no-controller
+    path: /example/no-controller
     defaults:
         _controller: FrameworkBundle:Template:template
-        template:    default/no_controller.html.twig
+        template:    example/no_controller.html.twig
