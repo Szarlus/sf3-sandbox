@@ -14,6 +14,11 @@ class TasksListPage
         $this->crawler = $crawler;
     }
 
+    public function refresh(Crawler $crawler)
+    {
+        $this->crawler = $crawler;
+    }
+
     /**
      * @return Crawler
      */
