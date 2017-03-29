@@ -37,7 +37,6 @@ services:
 
     app.service_b_lazy_loaded:
         class: AppBundle\Service\MyServiceB
-        lazy: true
 
     app.service_with_lazy_dep:
         class: AppBundle\Service\MyServiceWithLazyDependency
