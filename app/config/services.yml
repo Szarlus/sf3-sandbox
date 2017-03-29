@@ -16,6 +16,8 @@ services:
             - { name: security.voter }
         public: false
 
+############## DUMMY SERVICES START
+
     app.service_a:
         class: AppBundle\Service\MyServiceA
         arguments:
@@ -37,8 +39,27 @@ services:
 
     app.service_b_lazy_loaded:
         class: AppBundle\Service\MyServiceB
+        lazy: true
 
     app.service_with_lazy_dep:
         class: AppBundle\Service\MyServiceWithLazyDependency
         arguments:
             - "@app.service_b_lazy_loaded"
+
+############## DUMMY SERVICES END
+
+    app.task_repository:
+        class: AppBundle\Repository\ORMTaskRepository
+        factory:
+            - "@doctrine.orm.entity_manager"
+            - getRepository
+        arguments:
+            - AppBundle\Entity\Task
+
+    app.category_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory:
+            - "@doctrine.orm.entity_manager"
+            - getRepository
+        arguments:
+            - AppBundle\Entity\Category

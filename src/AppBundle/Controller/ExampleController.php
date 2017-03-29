@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Category;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @Route("/example")
@@ -46,10 +47,31 @@ class ExampleController extends Controller
 
         echo '4) checking what service B implements</br>';
         $serviceWithLazyDep = $this->get('app.service_with_lazy_dep');
-        $serviceWithLazyDep->showWhatServiceBImplements();
+        $serviceWithLazyDep->showWhatItImplements();
 
         echo '5) $serviceWithLazyDep->callB()</br>';
         var_dump($serviceWithLazyDep->callB());
+
+        die;
+    }
+
+    /**
+     * @Route("/repository", name="example_repository")
+     */
+    public function exampleRepositoryAction()
+    {
+        $taskRepository = $this->get('app.task_repository');
+
+        echo '1) get_class($taskRepository)</br>';
+        var_dump(get_class($taskRepository));
+
+        $categoryRepository = $this->get('app.category_repository');
+        $featureCategory = $categoryRepository->findOneBy(['name' => 'feature']);
+
+        $tasks = $taskRepository->findAllDoneInCategory($featureCategory);
+
+        echo '2) $repository->findAllDoneInCategory($featureCategory)</br>';
+        dump($tasks);
 
         die;
     }

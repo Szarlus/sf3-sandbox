@@ -12,7 +12,7 @@ class MyServiceWithLazyDependency
         $this->serviceB = $serviceB;
     }
 
-    public function showWhatServiceBImplements()
+    public function showWhatItImplements()
     {
         var_dump(class_implements($this->serviceB));
     }

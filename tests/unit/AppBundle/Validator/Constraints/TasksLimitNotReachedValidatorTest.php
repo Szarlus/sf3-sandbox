@@ -37,8 +37,11 @@ class TasksLimitNotReachedValidatorTest extends ConstraintValidatorTestCase
     {
         $task = new Task();
         $user = new User();
-        $task->setAssignedTo($user);
+        $user->assignTo(new Task());
+        $user->assignTo(new Task());
         $user->assignTo($task);
+
+        $task->setAssignedTo($user);
 
         $this->validator->validate($task, new TasksLimitNotReached());
 
@@ -46,10 +49,11 @@ class TasksLimitNotReachedValidatorTest extends ConstraintValidatorTestCase
     }
 
     /** @test */
-    public function itRaisesViolationIfUserWasNotYetAssignedToTheTaskAndHasTwoOtherTasksAssigned()
+    public function itRaisesViolationIfUserWasNotYetAssignedToTheTaskAndHasThreeOtherTasksAssigned()
     {
         $user = new User();
         $user->setUsername('test user');
+        $user->assignTo(new Task());
         $user->assignTo(new Task());
         $user->assignTo(new Task());
 
@@ -63,7 +67,7 @@ class TasksLimitNotReachedValidatorTest extends ConstraintValidatorTestCase
         $this
             ->buildViolation($constraint->message)
             ->setParameter('%username%', 'test user')
-            ->setParameter('%limit%', 2)
+            ->setParameter('%limit%', 3)
             ->atPath('property.path.assignedTo')
             ->assertRaised();
     }

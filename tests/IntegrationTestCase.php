@@ -24,9 +24,4 @@ abstract class IntegrationTestCase extends WebTestCase
 
         $this->container = static::createClient()->getContainer();
     }
-
-    protected function tearDown()
-    {
-        parent::tearDown();
-    }
 }

@@ -9,7 +9,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class TasksLimitNotReachedValidator extends ConstraintValidator
 {
-    private $limit = 2;
+    private $limit = 3;
 
     public function validate($value, Constraint $constraint)
     {

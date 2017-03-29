@@ -1,5 +1,6 @@
 AppBundle\Entity\Task:
     type: entity
+    repositoryClass: AppBundle\Repository\ORMTaskRepository
     table: tasks
     id:
         id:

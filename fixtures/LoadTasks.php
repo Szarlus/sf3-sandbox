@@ -40,8 +40,21 @@ class LoadTasks extends AbstractFixture implements OrderedFixtureInterface
         $task2->setCategory($this->getReference('category-feature'));
         $task2->setAssignedTo($this->getReference('user-user1'));
 
+        $task3 = new Task();
+
+        $task3->setName('example 2');
+        $task3->setDescription('example description 2');
+        $task3->setDueDate(new \DateTime());
+        $task3->getTags()->add($tagBackend);
+        $task3->finishWork();
+        $task3->setFile(new \SplFileObject(__FILE__));
+
+        $task3->setCategory($this->getReference('category-feature'));
+        $task3->setAssignedTo($this->getReference('user-user1'));
+
         $manager->persist($task1);
         $manager->persist($task2);
+        $manager->persist($task3);
 
         $manager->flush();
     }
