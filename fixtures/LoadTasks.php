@@ -42,8 +42,8 @@ class LoadTasks extends AbstractFixture implements OrderedFixtureInterface
 
         $task3 = new Task();
 
-        $task3->setName('example 2');
-        $task3->setDescription('example description 2');
+        $task3->setName('example 3');
+        $task3->setDescription('example description 3');
         $task3->setDueDate(new \DateTime());
         $task3->getTags()->add($tagBackend);
         $task3->finishWork();

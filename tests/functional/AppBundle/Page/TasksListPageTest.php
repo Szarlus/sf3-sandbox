@@ -6,36 +6,35 @@ namespace tests\functional\AppBundle\Page;
 use AppBundle\Entity\Category;
 use AppBundle\Entity\Tag;
 use AppBundle\Entity\Task;
+use tests\PageTestCase;
 use tests\traits\DatabaseDictionary;
-use tests\WebTestCase;
 
-class TasksListPageTest extends WebTestCase
+class TasksListPageTest extends PageTestCase
 {
-
     use DatabaseDictionary;
-
-    /** @var TasksListPage */
-    private $page;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->page = null;
-
         $this->purgeDatabase();
+    }
+
+    protected function createPage()
+    {
+        return new TasksListPage($this->client()->request('GET', '/task/list'));
     }
 
     /** @test */
     public function itHasAddNewLink()
     {
-        $this->assertExists($this->page()->addNewLink());
+        $this->assertSingleOccurrenceOf($this->page()->addNewLink());
     }
 
     /** @test */
     public function itHasEmptyTasksListIfNoTasksExists()
     {
-        $this->assertExists($this->page()->tasksTable());
+        $this->assertSingleOccurrenceOf($this->page()->tasksTable());
 
         $this->assertCount(0, $this->page()->tasksRows());
     }
@@ -45,23 +44,9 @@ class TasksListPageTest extends WebTestCase
     {
         $this->tasksExists();
 
-        $this->assertExists($this->page()->tasksTable());
+        $this->assertSingleOccurrenceOf($this->page()->tasksTable());
 
         $this->assertCount(2, $this->page()->tasksRows());
-    }
-
-    private function page()
-    {
-        if (!$this->page) {
-            $this->page = new TasksListPage($this->client()->request('GET', '/task/list'));
-        }
-
-        return $this->page;
-    }
-
-    private function assertExists($node)
-    {
-        $this->assertCount(1, $node);
     }
 
     private function tasksExists()
