@@ -57,6 +57,9 @@
         ],
         "post-update-cmd": [
             "@symfony-scripts"
+        ],
+        "phpmodules": [
+            "php -m"
         ]
     },
     "extra": {
