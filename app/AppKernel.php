@@ -42,12 +42,28 @@ class AppKernel extends Kernel
 
     public function getCacheDir()
     {
-        return '/home/ubuntu/sf3-sandbox/var/cache/'.$this->getEnvironment();
+        return $this->getVarDir().'/cache/'.$this->getEnvironment();
     }
 
     public function getLogDir()
     {
-        return '/home/ubuntu/sf3-sandbox/var/logs';
+        return $this->getVarDir().'/logs';
+    }
+
+    private function getVarDir()
+    {
+        if (getenv('VAGRANT')) {
+            return '/home/ubuntu/sf3-sandbox/var';
+        }
+
+        return $this->getRootDir().'/../var';
+    }
+
+    protected function getKernelParameters()
+    {
+        return array_merge(parent::getKernelParameters(), [
+            'kernel.var_dir' => $this->getVarDir()
+        ]);
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

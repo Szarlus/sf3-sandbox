@@ -35,7 +35,8 @@
         "twitter/bootstrap": "~3.0",
         "components/jquery": "~3.0",
         "friendsofsymfony/rest-bundle": "^2.1",
-        "jms/serializer-bundle": "^1.2"
+        "jms/serializer-bundle": "^1.2",
+        "ocramius/proxy-manager": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
